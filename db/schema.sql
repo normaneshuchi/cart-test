@@ -32,7 +32,6 @@ CREATE TABLE public.cart (
     subtotal integer NOT NULL,
     discount integer,
     total integer NOT NULL,
-    shipping integer NOT NULL,
     user_id integer NOT NULL,
     created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
     updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP
@@ -44,7 +43,7 @@ CREATE TABLE public.cart (
 -- Name: cart_products; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE public.cart_products (
+CREATE TABLE public.cart_product (
     id integer NOT NULL,
     product_id integer NOT NULL,
     cart_id integer NOT NULL
@@ -56,7 +55,7 @@ CREATE TABLE public.cart_products (
 -- Name: products; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE public.products (
+CREATE TABLE public.product (
     id integer NOT NULL,
     name text NOT NULL,
     price integer NOT NULL,
@@ -71,7 +70,7 @@ CREATE TABLE public.products (
 -- Name: users; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE public.users (
+CREATE TABLE public.user (
     id smallint NOT NULL,
     firstname text NOT NULL,
     lastname text NOT NULL,
@@ -85,7 +84,7 @@ CREATE TABLE public.users (
 -- Name: cart_products cart_products_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.cart_products
+ALTER TABLE ONLY public.cart_product
     ADD CONSTRAINT cart_products_pkey PRIMARY KEY (id);
 
 
@@ -103,7 +102,7 @@ ALTER TABLE ONLY public.cart
 -- Name: products products_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.products
+ALTER TABLE ONLY public.product
     ADD CONSTRAINT products_pkey PRIMARY KEY (id);
 
 
@@ -112,7 +111,7 @@ ALTER TABLE ONLY public.products
 -- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.users
+ALTER TABLE ONLY public.user
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
 
 
@@ -121,7 +120,7 @@ ALTER TABLE ONLY public.users
 -- Name: users users_un; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.users
+ALTER TABLE ONLY public.user
     ADD CONSTRAINT users_un UNIQUE (email);
 
 
@@ -130,7 +129,7 @@ ALTER TABLE ONLY public.users
 -- Name: cart_products cart_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.cart_products
+ALTER TABLE ONLY public.cart_product
     ADD CONSTRAINT cart_id_fkey FOREIGN KEY (cart_id) REFERENCES public.cart(id) MATCH FULL;
 
 
@@ -139,8 +138,8 @@ ALTER TABLE ONLY public.cart_products
 -- Name: cart_products product_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.cart_products
-    ADD CONSTRAINT product_id_fkey FOREIGN KEY (product_id) REFERENCES public.products(id) MATCH FULL;
+ALTER TABLE ONLY public.cart_product
+    ADD CONSTRAINT product_id_fkey FOREIGN KEY (product_id) REFERENCES public.product(id) MATCH FULL;
 
 
 --
@@ -149,7 +148,7 @@ ALTER TABLE ONLY public.cart_products
 --
 
 ALTER TABLE ONLY public.cart
-    ADD CONSTRAINT user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id);
+    ADD CONSTRAINT user_id_fkey FOREIGN KEY (user_id) REFERENCES public.user(id);
 
 
 -- Completed on 2019-08-15 08:12:17
