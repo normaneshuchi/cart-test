@@ -38,7 +38,7 @@ $ npm run test:cov
 
 ## Documentation
 
-Documentation for the API can be found at [read more here](https://documenter.getpostman.com/view/4443580/SVYxpb8k?version=latest).
+Documentation for the API can be found [here](https://documenter.getpostman.com/view/4443580/SVYxpb8k?version=latest).
 The Database Schema can be found in /api/db
 
 ## Database Management
