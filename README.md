@@ -47,22 +47,50 @@ The Database Schema can be found in /api/db
 To properly provision the Postgresql instance on heroku
   ->. Ensure heroku cli is installed
   ->. Ensure that you have Postgres 11.5 installed and a database 'cartdb' created locally.
-  ->. run "heroku addons:create heroku-postgresql:hobby-dev"
-  ->. confirm connection via command heroku pg:psql
-  ->. run heroku pg:push cartdb  DATABASE_URL  --app chimeratest to push local postgresdb to heroku
-  ->. run 'heroku pg:info' to confirm if database is working properly
-  ->. Run the NodeJs app to create the tables and relationships via TypeOrm
+  ->. run 
+  ```bash
+  heroku addons:create heroku-postgresql:hobby-dev
+  ```
+  ->. confirm connection via 
+  ```bash
+    heroku pg:psql
+  ```
+  ->. run the command below to push local postgresdb to heroku
+  ```bash
+  heroku pg:push cartdb  DATABASE_URL  --app chimeratest
+  ```
+   
+  ->. run 
+  ```bash
+  'heroku pg:info'
+  ``` 
+  to confirm if database is working properly
+  ->. Push the application to heroku to initialize the application and create the tables vie TypeOrm
+  ```bash
+    git push heroku master
+  ```
 
 ## PERFORMANCE TESTS
 Once your application has been pushed to Heroku and is running, 
-  ->. Run 'npm i -g artillery'. Once done, confimr installation by running 'artillery -V'
+  ->. Run 
+  ```bash
+  $ npm i -g artillery.
+  ``` 
+  Once done, confimr installation by running 
+  ```bash
+  $ artillery -V
+  ```
   ->. Cd to the application folder
-  ->. Run 'artillery run test.yml'
+  ->. Run 
+  ```bash
+  artillery run test.yml
+  ```
   ->. You can adjust the number of instances created per second via the arrivalRate setting in the test.yml file
 
+```bash
   sample output
 
-"  All virtual users finished
+All virtual users finished
 Summary report @ 06:46:55(+0300) 2019-08-16
   Scenarios launched:  1200
   Scenarios completed: 1198
@@ -79,7 +107,9 @@ Summary report @ 06:46:55(+0300) 2019-08-16
   Codes:
     404: 1198
   Errors:
-    ETIMEDOUT: 2 "
+    ETIMEDOUT: 2
+
+    ```
 
 ## License
 
