@@ -111,6 +111,3 @@ Summary report @ 06:46:55(+0300) 2019-08-16
 
     ```
 
-## License
-
-  Nest is [MIT licensed](LICENSE).
