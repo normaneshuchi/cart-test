@@ -1,12 +1,20 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CartProductsService } from './cart-products.service';
+import { DatabaseModule } from '../../db/database.module';
+import { cartProductsProviders } from './cart-products.providers';
+import { CartProductsController } from './cart-products.controller';
 
 describe('CartProductsService', () => {
   let service: CartProductsService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [CartProductsService],
+      imports: [DatabaseModule],
+  providers: [
+    ...cartProductsProviders,
+    CartProductsService,
+  ],
+  controllers: [CartProductsController],
     }).compile();
 
     service = module.get<CartProductsService>(CartProductsService);
