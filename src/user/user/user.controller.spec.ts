@@ -14,13 +14,13 @@ describe('User Controller', () => {
         ...userProviders,
         UserService,
       ],
-      controllers: [UserController]
+      controllers: [UserController],
     }).compile();
 
     controller = module.get<UserController>(UserController);
   });
 
   it('should be defined', () => {
-    expect(controller).toBeDefined();
-  });
+    expect(controller).toBeTruthy();
+  },30000);
 });

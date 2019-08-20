@@ -22,5 +22,5 @@ describe('Product Controller', () => {
 
   it('should be defined', () => {
     expect(controller).toBeDefined();
-  });
+  },30000);
 });

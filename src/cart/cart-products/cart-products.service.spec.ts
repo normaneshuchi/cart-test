@@ -10,11 +10,11 @@ describe('CartProductsService', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [DatabaseModule],
-  providers: [
-    ...cartProductsProviders,
-    CartProductsService,
-  ],
-  controllers: [CartProductsController],
+      providers: [
+        ...cartProductsProviders,
+        CartProductsService,
+      ],
+      controllers: [CartProductsController],
     }).compile();
 
     service = module.get<CartProductsService>(CartProductsService);
@@ -22,5 +22,5 @@ describe('CartProductsService', () => {
 
   it('should be defined', () => {
     expect(service).toBeDefined();
-  });
+  }, 30000);
 });

@@ -23,4 +23,10 @@ describe('Cart Controller', () => {
   it('should be defined', () => {
     expect(controller).toBeDefined();
   });
+  // describe('findAll', () => {
+  //   it('should return an array of carts', async () => {
+  //     controller.index();
+  //     expect(controller.index).toHaveBeenCalled();
+  //   });
+  // });
 });
