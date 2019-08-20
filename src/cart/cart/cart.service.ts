@@ -17,7 +17,7 @@ export class CartService {
     async find(id): Promise<Cart> {
         return await this.cartRepository.findOneOrFail(
             {
-                where: {id: id},
+                where: {id},
                 relations: ['user']
             },
         );
