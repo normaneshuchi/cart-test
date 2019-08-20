@@ -14,7 +14,7 @@ export class CartProductsService {
     }
 
     async create(cartProduct: CartProduct): Promise<CartProduct> {
-        return await this.cartProductRepository.create(cartProduct);
+        return await this.cartProductRepository.save(cartProduct);
     }
 
     async delete(id): Promise<DeleteResult> {
