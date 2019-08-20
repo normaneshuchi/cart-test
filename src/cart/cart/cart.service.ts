@@ -16,7 +16,7 @@ export class CartService {
 
     async find(id): Promise<Cart> {
         return await this.cartRepository.findOne(id, {
-                relations: ['user', 'cartItems']
+                relations: ['user', 'cartItems'],
             }
         );
     }

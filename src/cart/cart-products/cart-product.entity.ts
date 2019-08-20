@@ -12,9 +12,11 @@ export class CartProduct {
     
     @ManyToOne(type => Product, product => product.cartItems)
     @ApiModelProperty()
+    @Column({select: true})
     product: Product;
 
     @ManyToOne(type => Cart, cart => cart.cartItems)
     @ApiModelProperty()
+    @Column({select: true})
     cart: Product;
 }
