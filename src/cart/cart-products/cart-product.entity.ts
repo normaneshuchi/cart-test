@@ -8,15 +8,11 @@ import { ApiModelProperty } from '@nestjs/swagger';
 export class CartProduct {
     @PrimaryGeneratedColumn()
     id: number;
-
-    
     @ManyToOne(type => Product, product => product.cartItems)
     @ApiModelProperty()
-    @Column({select: true})
     product: Product;
 
     @ManyToOne(type => Cart, cart => cart.cartItems)
     @ApiModelProperty()
-    @Column({select: true})
     cart: Product;
 }
