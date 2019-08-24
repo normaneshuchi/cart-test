@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, ManyToMany } from 'typeorm';
 import { type } from 'os';
 import { Product } from '../../product/product/product.entity';
 import { Cart } from '../cart/cart.entity';
@@ -8,12 +8,18 @@ import { ApiModelProperty } from '@nestjs/swagger';
 export class CartProduct {
     @PrimaryGeneratedColumn()
     id: number;
-    @ManyToOne(type => Product, product => product.cartItems)
+
+    @ManyToMany(type => Product, product => product.cartItems)
     @ApiModelProperty()
-    @Column('int')
     product: Product;
-    @Column('int')
-    @ManyToOne(type => Cart, cart => cart.cartItems)
+
+    @ManyToMany(type => Cart, cart => cart.cartItems)
     @ApiModelProperty()
-    cart: Product;
+    cart: Cart;
+
+    @Column('double')
+    quantity: number;
+
+    @CreateDateColumn({type: 'timestamp'})
+    createdAt: Date;
 }

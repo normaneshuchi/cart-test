@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToMany } from 'typeorm';
 import { CartProduct } from '../../cart/cart-products/cart-product.entity';
 import { ApiModelProperty } from '@nestjs/swagger';
 
@@ -20,7 +20,7 @@ export class Product {
     salePrice: number;
 
     @ApiModelProperty()
-    @OneToMany(type => CartProduct, cartProduct => cartProduct.product)
+    @ManyToMany(type => CartProduct, cartProduct => cartProduct.product)
     cartItems: CartProduct[];
 
     @Column()

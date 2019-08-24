@@ -1,7 +1,8 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, OneToOne, JoinColumn, OneToMany } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, OneToOne, JoinColumn, OneToMany, ManyToMany } from 'typeorm';
 import { ApiModelProperty, ApiImplicitBody } from '@nestjs/swagger';
 import { User } from '../../user/user/user.entity';
 import { CartProduct } from '../cart-products/cart-product.entity';
+import { Product } from '../../product/product/product.entity';
 
 @Entity()
 export class Cart {
@@ -24,10 +25,11 @@ export class Cart {
     @Column('integer')
     shipping: number;
 
-    @OneToMany(type => CartProduct, cartProduct => cartProduct.cart)
+    @ManyToMany(type => CartProduct, cartProduct => cartProduct.cart)
     cartItems: CartProduct[];
 
     @OneToOne(type => User)
     @JoinColumn()
     user: User;
+
 }
