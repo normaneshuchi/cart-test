@@ -17,8 +17,17 @@ export class UserService {
         return await this.userRepository.findOneOrFail(id)
     }
 
-    async create(user: User): Promise<User> {
-        return await this.userRepository.save(user);
+    async create(user: User){
+        try {
+            // check for existing user
+            const existingUser = this.userRepository.findOneOrFail({where: {'email': user.email}})
+            //create user
+            return await this.userRepository.save(user);
+        } catch (error) {
+            // return error
+            return `user with email ${user.email} already exists`
+            
+        }
     }
 
     async delete(id): Promise<DeleteResult> {

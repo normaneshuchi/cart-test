@@ -12,7 +12,7 @@ export class CartProductsController {
     }
 
     @Post('add')
-    async addProduct(@Body() cartProduct: CartProduct): Promise<CartProduct> {
+    async addProduct(@Body() cartProduct: CartProduct){
         return await this.cartProductsService.create(cartProduct);
     }
 

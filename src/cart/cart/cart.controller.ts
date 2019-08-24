@@ -9,20 +9,21 @@ export class CartController {
     constructor(private cartService: CartService) {}
 
     @Get()
+    // get all carts
     index() {
         return this.cartService.findAll();
     }
-
+    // get cart by id
     @Get(':id')
-    async getCart(@Param('id') id): Promise<Cart> {
+    async getCart(@Param('id') id) {
         return await this.cartService.find(id);
     }
-
+    // create new cart
     @Post('create')
-    async createCart(@Body() cart: Cart): Promise<Cart> {
+    async createCart(@Body() cart: Cart) {
         return await this.cartService.create(cart);
     }
-
+    // update cart
     @Put(':id/update')
     async updateCart(@Param('id') id, @Body() cart: Cart ): Promise<any> {
         cart.id = Number(id);

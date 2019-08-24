@@ -17,8 +17,17 @@ export class ProductService {
         return await this.productRepository.findOneOrFail(id);
     }
 
-    async create(product: Product): Promise<Product> {
-        return await this.productRepository.save(product);
+    async create(product: Product) {
+        try {
+            // check if product exists
+            const existingProduct = this.productRepository.findOneOrFail({where: {'name': product.name}});
+            // create new product
+            return await this.productRepository.save(product);
+            ;
+        } catch (error) {
+            // return error
+            return `product ${product.name} already exists`;
+        }
     }
     async delete(id): Promise<DeleteResult> {
         return await this.productRepository.delete(id);

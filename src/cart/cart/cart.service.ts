@@ -1,7 +1,7 @@
-import { Injectable, Inject } from "@nestjs/common";
-import { Cart } from "./cart.entity";
-import { Repository, UpdateResult } from "typeorm";
-import { relative } from "path";
+import { Injectable, Inject, Logger } from '@nestjs/common';
+import { Cart } from './cart.entity';
+import { Repository, UpdateResult } from 'typeorm';
+import { relative } from 'path';
 
 @Injectable()
 export class CartService {
@@ -11,21 +11,38 @@ export class CartService {
     ) { }
 
     async findAll(): Promise<Cart[]> {
-        return await this.cartRepository.find({ relations: ['user', 'cartItems'] });
+        // return await this.cartRepository.find({ relations: ['user', 'cartItems'] });        
+        return await this.cartRepository.createQueryBuilder('cart')
+                    .leftJoinAndSelect('cart.cartItems', 'cart_product')
+                    .innerJoinAndSelect('cart_product.product', 'product')
+                    .getMany();
     }
 
     async find(id): Promise<Cart> {
-        return await this.cartRepository.findOne(id, {
-                relations: ['user', 'cartItems'],
-            }
-        );
+        return await this.cartRepository.createQueryBuilder('cart')
+        .where('cart.id = :id', {id})
+        .leftJoinAndSelect('cart.cartItems', 'cart_product')
+        .innerJoinAndSelect('cart_product.product', 'product')
+        .getOne();
+
     }
 
-    async create(cart: Cart): Promise<Cart> {
-        return await this.cartRepository.save(cart);
+    async create(cart: Cart) {
+        try {
+            const existingCart = this.cartRepository.findOneOrFail({where: {'user': cart.user}});
+            // create actual cart
+            return await this.cartRepository.save(cart);
+        } catch (error) {
+            // return error
+            return 'cart for user already exists';
+        }
     }
 
-    async update(cart: Cart): Promise<UpdateResult> {
-        return await this.cartRepository.update(cart.id, cart);
+    async update(cart: Cart): Promise<Cart> {
+        try {
+          return await this.cartRepository.save(cart);  
+        } catch (error) {
+            return error;
+        }
     }
  }

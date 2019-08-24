@@ -3,6 +3,7 @@ import { CartController } from './cart.controller';
 import { DatabaseModule } from '../../db/database.module';
 import { cartProviders } from './cart.providers';
 import { CartService } from './cart.service';
+import { Cart } from './cart.entity';
 
 describe('Cart Controller', () => {
   let controller: CartController;
@@ -23,10 +24,4 @@ describe('Cart Controller', () => {
   it('should be defined', () => {
     expect(controller).toBeDefined();
   });
-  // describe('findAll', () => {
-  //   it('should return an array of carts', async () => {
-  //     controller.index();
-  //     expect(controller.index).toHaveBeenCalled();
-  //   });
-  // });
 });

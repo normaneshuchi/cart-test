@@ -20,7 +20,7 @@ describe('Product Controller', () => {
     controller = module.get<ProductController>(ProductController);
   });
 
-  it('should be defined', () => {
-    expect(controller).toBeDefined();
-  },30000);
+  it('should be defined', async () => {
+    await expect(controller).toBeDefined();
+  });
 });

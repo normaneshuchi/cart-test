@@ -17,7 +17,7 @@ export class ProductController {
     }
 
     @Post('create')
-    async createProduct(@Body() product: Product): Promise<Product> {
+    async createProduct(@Body() product: Product) {
         return await this.productService.create(product);
     }
 

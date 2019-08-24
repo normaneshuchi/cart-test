@@ -9,16 +9,19 @@ export class CartProduct {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @ManyToMany(type => Product, product => product.cartItems)
+    @ManyToOne(type => Product, product => product.cartItems)
     @ApiModelProperty()
     product: Product;
 
-    @ManyToMany(type => Cart, cart => cart.cartItems)
+    @ManyToOne(type => Cart, cart => cart.cartItems)
     @ApiModelProperty()
     cart: Cart;
 
-    @Column('double')
+    @Column('int')
     quantity: number;
+
+    @Column({type: 'numeric', precision: 8, scale: 2})
+    total: number;
 
     @CreateDateColumn({type: 'timestamp'})
     createdAt: Date;

@@ -24,7 +24,7 @@ export class UserController {
     @Post('create')
     @ApiResponse({ status: 201, description: 'The record has been successfully created.' })
     @ApiResponse({ status: 403, description: 'Forbidden.' })
-    async create(@Body() userData: User): Promise<any> {
+    async create(@Body() userData: User) {
         return this.userService.create(userData);
     }
     @Put(':id/update')

@@ -10,22 +10,22 @@ export class Cart {
     id: number;
 
     @ApiModelProperty()
-    @Column('integer')
+    @Column({type: 'numeric', precision: 8, scale: 2})
     subtotal: number;
 
     @ApiModelProperty()
-    @Column('integer')
+    @Column({type: 'numeric', precision: 8, scale: 2})
     discount: number;
 
     @ApiModelProperty()
-    @Column('integer')
+    @Column({type: 'numeric', precision: 8, scale: 2})
     total: number;
 
     @ApiModelProperty()
-    @Column('integer')
+    @Column({type: 'numeric', precision: 8, scale: 2})
     shipping: number;
 
-    @ManyToMany(type => CartProduct, cartProduct => cartProduct.cart)
+    @OneToMany(type => CartProduct, cartProduct => cartProduct.cart)
     cartItems: CartProduct[];
 
     @OneToOne(type => User)
