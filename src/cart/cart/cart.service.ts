@@ -10,8 +10,11 @@ export class CartService {
         private readonly cartRepository: Repository<Cart>,
     ) { }
 
+    async getAll(): Promise<Cart[]> {
+        return await this.cartRepository.find({ relations: ['user', 'cartItems'] }); 
+    }
+
     async findAll(): Promise<Cart[]> {
-        // return await this.cartRepository.find({ relations: ['user', 'cartItems'] });        
         return await this.cartRepository.createQueryBuilder('cart')
                     .leftJoinAndSelect('cart.cartItems', 'cart_product')
                     .innerJoinAndSelect('cart_product.product', 'product')

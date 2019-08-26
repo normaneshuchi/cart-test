@@ -11,7 +11,7 @@ export class CartController {
     // get all carts
     @Get()
     index() {
-        return this.cartService.findAll();
+        return this.cartService.getAll();
     }
     // get cart by id
     @Get(':id')
