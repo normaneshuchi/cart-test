@@ -37,7 +37,7 @@ export class CartService {
             return await this.cartRepository.save(cart);
         } catch (error) {
             // return error
-            return 'cart for user already exists';
+            return error;
         }
     }
 
