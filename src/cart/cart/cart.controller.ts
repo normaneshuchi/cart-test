@@ -8,8 +8,8 @@ import { ApiImplicitBody } from '@nestjs/swagger';
 export class CartController {
     constructor(private cartService: CartService) {}
 
-    @Get()
     // get all carts
+    @Get()
     index() {
         return this.cartService.findAll();
     }
