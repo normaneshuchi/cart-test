@@ -8,13 +8,22 @@ export class ProductService {
         @Inject('PRODUCT_REPOSITORY')
         private readonly productRepository: Repository<Product>
     ) {}
-
+        // updated with try-catch blocks
     async findAll(): Promise<Product[]> {
-        return await this.productRepository.find();
+        try {
+            return await this.productRepository.find();
+        } catch (error) {
+            return error;
+        }
+        
     }
 
     async find(id): Promise<Product> {
-        return await this.productRepository.findOneOrFail(id);
+        try {
+          return await this.productRepository.findOneOrFail(id); 
+        } catch (error) {
+           return error;
+        }
     }
 
     async create(product: Product) {
