@@ -11,7 +11,7 @@ export class CartService {
     ) { }
 
     async getAll(): Promise<Cart[]> {
-        return await this.cartRepository.find({ relations: ['user', 'cartItems'] }); 
+        return await this.cartRepository.find({ relations: ['user'] }); 
     }
 
     async findAll(): Promise<Cart[]> {
