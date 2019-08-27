@@ -1,6 +1,6 @@
 import { Injectable, Inject, Logger } from '@nestjs/common';
 import { Cart } from './cart.entity';
-import { Repository, UpdateResult } from 'typeorm';
+import { Repository, UpdateResult, DeleteResult } from 'typeorm';
 import { relative } from 'path';
 
 @Injectable()
@@ -37,13 +37,21 @@ export class CartService {
             return await this.cartRepository.save(cart);
         } catch (error) {
             // return error
-            return error;
+            return `cart already exists for user`;
         }
     }
 
     async update(cart: Cart): Promise<Cart> {
         try {
           return await this.cartRepository.save(cart);  
+        } catch (error) {
+            return error;
+        }
+    }
+
+    async delete(id: string): Promise<DeleteResult> {
+        try {
+            return this.cartRepository.delete(id);
         } catch (error) {
             return error;
         }

@@ -1,8 +1,9 @@
-import { Controller, Get, Param, Post, Body, Put } from '@nestjs/common';
+import { Controller, Get, Param, Post, Body, Put, Delete } from '@nestjs/common';
 import { CartService } from './cart.service';
 import { Cart } from './cart.entity';
 import { async } from 'rxjs/internal/scheduler/async';
 import { ApiImplicitBody } from '@nestjs/swagger';
+import { DeleteResult } from 'typeorm';
 
 @Controller('cart')
 export class CartController {
@@ -28,5 +29,10 @@ export class CartController {
     async updateCart(@Param('id') id, @Body() cart: Cart ): Promise<any> {
         cart.id = Number(id);
         return await this.cartService.update(cart);
+    }
+
+    @Delete(':id/delete')
+    async deleteCart(@Param('id') id): Promise<DeleteResult> {
+        return this.cartService.delete(id);
     }
 }
